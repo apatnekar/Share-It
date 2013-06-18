@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Share it</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="radiobutton1">A</string>
+    <string name="radiobutton2">B</string>
+    <string name="radiobutton3">Other</string>
+    <string name="addbutt">Add</string>
+    <string name="textfield">text</string>
+    <string name="currency">$</string>
+    <string name="textdescript">Enter your amount here..</string>
+
+</resources>
