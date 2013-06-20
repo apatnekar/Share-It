@@ -20,9 +20,9 @@ import android.widget.Toast;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-
 
 
 public class MainActivity extends Activity{
@@ -91,6 +91,19 @@ public class MainActivity extends Activity{
 					//db.insert(DbHelper, "shareit_table",cv);
 					db.insert("shareit_table", "shareit_table",cv);
 					
+					Log.d("AHP", "DB created........");
+					
+					//String[] columns = {"name","spent"};
+					Cursor cursor = db.query("shareit_table", null, null, null, null, null, null);
+				    cursor.moveToFirst();
+				    while(cursor.moveToNext())
+				    {
+				    	String name = cursor.getString(cursor.getColumnIndex("name"));
+				    	String spent = cursor.getString(cursor.getColumnIndex("spent"));
+				    	Log.d("AHP", "TABLE :- "+name.toString() +" "+spent.toString());
+				    	Toast.makeText(MainActivity.this,"Name = " + name +"\nSPENT = "+spent, Toast.LENGTH_SHORT).show();
+				    	
+				    }
 					
 					try {
 						InputStream inputStream = openFileInput(FILENAME);
