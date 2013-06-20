@@ -11,5 +11,6 @@
     <string name="textfield">text</string>
     <string name="currency">$</string>
     <string name="textdescript">Enter your amount here..</string>
+    <string name="defaultamount">5.0</string>
 
 </resources>

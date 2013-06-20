@@ -11,28 +11,19 @@
     <EditText
         android:id="@+id/editText1"
         style="android:editTextStyle"
-        android:layout_width="136dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:contentDescription="@string/textdescript"
         android:ems="10"
+        android:hint="@string/defaultamount"
         android:inputType="numberDecimal"
+        android:singleLine="true"
         android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceMediumInverse"
         android:typeface="monospace" >
 
         <requestFocus />
     </EditText>
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText1"
-        android:layout_below="@+id/button1"
-        android:layout_marginTop="72dp"
-        android:text="@string/textfield" />
 
     <RadioGroup
         android:id="@+id/radioGroup1"
@@ -65,14 +56,6 @@
             android:text="@string/radiobutton3"/>
     </RadioGroup>
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/addbutt"/>
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -82,7 +65,35 @@
         android:layout_alignTop="@+id/editText1"
         android:layout_toRightOf="@+id/editText1"
         android:text="@string/currency"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/event_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:text="@string/addbutt" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="68dp"
+        android:text="@string/textfield" />
+
+    <EditText
+        android:id="@+id/event_name"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignRight="@+id/radioGroup1"
+        android:layout_centerVertical="true"
+        android:ems="10"
+        android:inputType="textMultiLine" />
 
 </RelativeLayout>
 

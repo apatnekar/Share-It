@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import android.app.Activity;
@@ -50,6 +51,10 @@ public class MainActivity extends Activity{
 		  radioGroup = (RadioGroup) findViewById(R.id.radioGroup1);
 		  addButton = (Button) findViewById(R.id.button1);
 		  et = (EditText) findViewById(R.id.editText1);
+		  final EditText lab = (EditText) findViewById(R.id.event_name);
+		  final TextView outtext = (TextView) findViewById(R.id.textView1);
+		  
+		  
 		  addButton.setOnClickListener(new OnClickListener() {
 			  
 				@Override
@@ -57,14 +62,15 @@ public class MainActivity extends Activity{
 		 
 				        // get selected radio button from radioGroup
 					int selectedId = radioGroup.getCheckedRadioButtonId();
-		 
+					//et = (EditText) findViewById(R.id.editText1);
 					// find the radiobutton by returned id
 				        radioButton = (RadioButton) findViewById(selectedId);
 		 
 					Toast.makeText(MainActivity.this,
 						radioButton.getText(), Toast.LENGTH_SHORT).show();
+					Log.d("AHP", "AMOUNT ENTERED :"+ et.getText().toString());
 					
-					Log.d("AHP", et.getText().toString());
+					outtext.setText(lab.getText().toString());
 					
 					Log.d("AHP", "In OnButton....");
 					String FILENAME = "hello_file";
@@ -104,6 +110,8 @@ public class MainActivity extends Activity{
 				    	Toast.makeText(MainActivity.this,"Name = " + name +"\nSPENT = "+spent, Toast.LENGTH_SHORT).show();
 				    	
 				    }
+				    cursor.close();
+				    db.close();
 					
 					try {
 						InputStream inputStream = openFileInput(FILENAME);
