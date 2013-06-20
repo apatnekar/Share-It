@@ -18,18 +18,24 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 
 
 public class MainActivity extends Activity{
 	
+	protected static final String DbHelper = null;
 	private RadioGroup radioGroup;
 	private RadioButton radioButton;
 	private Button addButton;
 	private EditText et;
 
+	SQLiteDatabase db;
+	DbHelper dbhelper;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,7 +50,6 @@ public class MainActivity extends Activity{
 		  radioGroup = (RadioGroup) findViewById(R.id.radioGroup1);
 		  addButton = (Button) findViewById(R.id.button1);
 		  et = (EditText) findViewById(R.id.editText1);
-		 
 		  addButton.setOnClickListener(new OnClickListener() {
 			  
 				@Override
@@ -76,6 +81,16 @@ public class MainActivity extends Activity{
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+					
+					dbhelper= new DbHelper(MainActivity.this);
+					db = dbhelper.getWritableDatabase();
+					ContentValues cv = new ContentValues();
+					cv.put("name", "AMEYAP");
+					cv.put("spent", "123");
+					
+					//db.insert(DbHelper, "shareit_table",cv);
+					db.insert("shareit_table", "shareit_table",cv);
+					
 					
 					try {
 						InputStream inputStream = openFileInput(FILENAME);
