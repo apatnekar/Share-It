@@ -9,11 +9,13 @@ public class DbHelper extends SQLiteOpenHelper {
 	public static final String DATABASE_NAME = "shareit_db";
 	public static final String TABLE = "shareit_table";
 	public static final String C_ID = "_id";
+	public static final String EVENT = "event";
 	public static final String NAME = "name";
 	public static final String SPENT = "spent";
 	
 	private final String createDb = "create table if not exists " + TABLE + "( "
 			+ C_ID + " integer primary key autoincrement, "
+			+ EVENT + " text, "
 			+ NAME + " text, "
 			+ SPENT + " text);";
 		

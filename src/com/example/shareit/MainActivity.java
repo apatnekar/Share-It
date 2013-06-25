@@ -32,6 +32,7 @@ public class MainActivity extends Activity{
 	private RadioGroup radioGroup;
 	private RadioButton radioButton;
 	private Button addButton;
+	private Button retButton;
 	private EditText et;
 
 	SQLiteDatabase db;
@@ -44,16 +45,39 @@ public class MainActivity extends Activity{
 		Log.d("AHP", "Calling OnButton....");
 		addListenerOnButton();
 
+		//----
+		SQLiteDatabase sqdb = openOrCreateDatabase("mydb", MODE_PRIVATE, null);
+		sqdb.execSQL("CREATE TABLE IF NOT EXISTS mytable (lastname VARCHAR, firstname VARCHAR, age INT(3))");
+		sqdb.execSQL("INSERT INTO mytable VALUES ('Patnekar','Ameya',24)");
+		sqdb.execSQL("INSERT INTO mytable VALUES ('Pat','Am',25)");
+		sqdb.close();
 	}
 
 	  public void addListenerOnButton() {
 		  
 		  radioGroup = (RadioGroup) findViewById(R.id.radioGroup1);
 		  addButton = (Button) findViewById(R.id.button1);
+		  retButton = (Button) findViewById(R.id.button2);
 		  et = (EditText) findViewById(R.id.editText1);
 		  final EditText lab = (EditText) findViewById(R.id.event_name);
 		  final TextView outtext = (TextView) findViewById(R.id.textView1);
 		  
+		  
+		  retButton.setOnClickListener(new OnClickListener()
+		  {
+			  public void onClick(View v)
+			  {
+				  SQLiteDatabase sqdb = openOrCreateDatabase("mydb", MODE_PRIVATE, null);
+				  Cursor c = sqdb.rawQuery("SELECT * FROM mytable", null);
+				  c.moveToFirst();
+				  Log.d("AHP",c.getString(0)+c.getString(1)+c.getString(2));
+				  while(c.moveToNext())
+				  Log.d("AHP",c.getString(0)+c.getString(1)+c.getString(2));
+				  sqdb.execSQL("DROP TABLE mytable");
+				  sqdb.close();
+			  }
+			  
+		  });
 		  
 		  addButton.setOnClickListener(new OnClickListener() {
 			  
@@ -91,8 +115,11 @@ public class MainActivity extends Activity{
 					dbhelper= new DbHelper(MainActivity.this);
 					db = dbhelper.getWritableDatabase();
 					ContentValues cv = new ContentValues();
-					cv.put("name", "AMEYAP");
-					cv.put("spent", "123");
+					//cv.put("name", "AMEYAP");
+					cv.put("event",lab.getText().toString());
+					cv.put("name", radioButton.getText().toString());
+					cv.put("spent",et.getText().toString());
+					//cv.put("spent", "123");
 					
 					//db.insert(DbHelper, "shareit_table",cv);
 					db.insert("shareit_table", "shareit_table",cv);
@@ -104,10 +131,11 @@ public class MainActivity extends Activity{
 				    cursor.moveToFirst();
 				    while(cursor.moveToNext())
 				    {
+				    	String event = cursor.getString(cursor.getColumnIndex("event"));
 				    	String name = cursor.getString(cursor.getColumnIndex("name"));
 				    	String spent = cursor.getString(cursor.getColumnIndex("spent"));
-				    	Log.d("AHP", "TABLE :- "+name.toString() +" "+spent.toString());
-				    	Toast.makeText(MainActivity.this,"Name = " + name +"\nSPENT = "+spent, Toast.LENGTH_SHORT).show();
+				    	Log.d("AHP", "TABLE :- " + radioButton.getText().toString() + ", "+name.toString() +", "+spent.toString());
+				    	Toast.makeText(MainActivity.this,"Event = " + event + "\nName = " + name +"\nSPENT = "+spent, Toast.LENGTH_SHORT).show();
 				    	
 				    }
 				    cursor.close();
